@@ -1,0 +1,15 @@
+app:
+  port: 8080
+  host: 0.0.0.0
+database:
+  mysql:
+    host: localhost
+    port: 3306
+    user: root
+    password: password
+    dbname: mydb
+  redis:
+    host: localhost
+    port: 6379
+    password: ""
+    db: 0
