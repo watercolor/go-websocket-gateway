@@ -17,7 +17,7 @@ var upgrader = websocket.Upgrader{
 }
 
 const (
-	pingInterval = 30 * time.Second // 心跳间隔
+	pingInterval = 10 * time.Second // 心跳间隔
 	pingMessage  = "ping"           // 心跳消息
 )
 
