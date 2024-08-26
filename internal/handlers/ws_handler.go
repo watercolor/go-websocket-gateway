@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/watercolor/go-websocket-gateway/pkg/logger"
 )
 
 var upgrader = websocket.Upgrader{
@@ -43,11 +44,18 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 		select {
 		case <-ticker.C:
 			if err := conn.WriteMessage(websocket.PingMessage, []byte(pingMessage)); err != nil {
-				log.Println("write ping:", err)
+				logger.Info("write ping:", err)
 				return
 			}
 		default:
 			// 这里可以添加其他逻辑，例如处理从客户端接收到的消息
+			// 接收客户端发来的消息
+			_, message, err := conn.ReadMessage()
+			if err != nil {
+				log.Println("read:", err)
+				return
+			}
+			logger.Infof("Received message: %s", string(message))
 		}
 	}
 }

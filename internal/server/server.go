@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/watercolor/go-websocket-gateway/config"
+	"github.com/watercolor/go-websocket-gateway/pkg/logger"
 )
 
 type Server struct {
@@ -26,7 +27,7 @@ func NewServer() *Server {
 
 func (s *Server) Run(router *mux.Router) {
 	s.Handler = router
-
+	logger.Info("hello")
 	log.Printf("Starting server on %s", s.Addr)
 	if err := s.Server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("ListenAndServe: %s\n", err)
